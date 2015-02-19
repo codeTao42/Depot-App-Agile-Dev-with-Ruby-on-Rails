@@ -12,7 +12,7 @@ class UserStoriesTest < ActionDispatch::IntegrationTest
     assert_response :success
     assert_template "index"
 
-    xml_http_request :post, '/line_items', product_id: ruby_book.product_id
+    xml_http_request :post, '/line_items', product_id: ruby_book.id
     assert_response :success
 
     cart = Cart.find(session[:cart_id])
@@ -23,7 +23,7 @@ class UserStoriesTest < ActionDispatch::IntegrationTest
     assert_response :success
     assert_template "new"
 
-    post_via_redirect "/orders"
+    post_via_redirect "/orders",
                       order: { name:    "Adam Jarrell",
                                address: "123 The Street",
                                email:   "acjarrell@gmail.com",
